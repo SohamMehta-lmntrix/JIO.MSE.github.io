@@ -1,0 +1,2007 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MyJio - Enhanced Customer Experience Portal</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    
+    <style>
+        :root {
+            --primary-blue: #0066CC;
+            --secondary-purple: #8B5CF6;
+            --accent-green: #10B981;
+            --warning-orange: #F59E0B;
+            --error-red: #EF4444;
+            --neutral-gray: #6B7280;
+            --background: #F8FAFC;
+            --surface: #FFFFFF;
+            --text-primary: #1F2937;
+            --text-secondary: #6B7280;
+            --border: #E5E7EB;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: var(--background);
+            color: var(--text-primary);
+            line-height: 1.6;
+        }
+
+        /* Navigation Styles */
+        .navbar {
+            background: var(--surface);
+            padding: 1rem 0;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 2rem;
+        }
+
+        .jio-logo {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--primary-blue);
+        }
+
+        .jio-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: var(--primary-blue);
+        }
+
+        .nav-menu {
+            display: flex;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        .nav-item {
+            text-decoration: none;
+            color: var(--text-secondary);
+            padding: 0.5rem 1rem;
+            border-radius: 50px;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .nav-item:hover,
+        .nav-item.active {
+            background: var(--primary-blue);
+            color: white;
+        }
+
+        .nav-toggle {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+        }
+
+        .bar {
+            width: 25px;
+            height: 3px;
+            background: var(--text-primary);
+            margin: 3px 0;
+            transition: 0.3s;
+        }
+
+        /* Main Content */
+        .main-content {
+            margin-top: 80px;
+            min-height: calc(100vh - 80px);
+            padding: 2rem;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .page {
+            display: none;
+        }
+
+        .page.active {
+            display: block;
+            animation: fadeIn 0.3s ease-in;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Dashboard Styles */
+        .hero-section {
+            background: linear-gradient(135deg, var(--primary-blue), var(--secondary-purple));
+            color: white;
+            padding: 3rem 2rem;
+            border-radius: 20px;
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+
+        .hero-title {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            font-weight: 700;
+        }
+
+        .hero-subtitle {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+
+        .quick-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .stat-card {
+            background: var(--surface);
+            padding: 1.5rem;
+            border-radius: 15px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .stat-icon {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1rem;
+            color: white;
+            font-size: 1.5rem;
+        }
+
+        .stat-value {
+            font-size: 2rem;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-label {
+            color: var(--text-secondary);
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .feature-card {
+            background: var(--surface);
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .feature-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary-blue), var(--secondary-purple));
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+        }
+
+        .feature-icon {
+            width: 80px;
+            height: 80px;
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1rem;
+            color: white;
+            font-size: 2rem;
+        }
+
+        .feature-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+
+        .feature-description {
+            color: var(--text-secondary);
+            line-height: 1.6;
+        }
+
+        /* Button Styles */
+        .btn {
+            padding: 0.75rem 1.5rem;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+            text-align: center;
+        }
+
+        .btn-primary {
+            background: var(--primary-blue);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: #0052A3;
+            transform: translateY(-2px);
+        }
+
+        .btn-secondary {
+            background: var(--secondary-purple);
+            color: white;
+        }
+
+        .btn-success {
+            background: var(--accent-green);
+            color: white;
+        }
+
+        .btn-warning {
+            background: var(--warning-orange);
+            color: white;
+        }
+
+        /* Network Page Styles */
+        .network-status {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .network-map {
+            background: var(--surface);
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+        }
+
+        .map-placeholder {
+            height: 300px;
+            background: linear-gradient(135deg, #e3f2fd, #bbdefb);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--primary-blue);
+            font-size: 1.2rem;
+            position: relative;
+        }
+
+        .tower-status {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .tower-item {
+            background: var(--surface);
+            padding: 1rem;
+            border-radius: 10px;
+            border-left: 4px solid;
+        }
+
+        .tower-excellent {
+            border-left-color: var(--accent-green);
+        }
+
+        .tower-good {
+            border-left-color: var(--warning-orange);
+        }
+
+        .tower-fair {
+            border-left-color: var(--error-red);
+        }
+
+        /* Chatbot Styles */
+        .chat-widget {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 1000;
+        }
+
+        .chat-bubble {
+            width: 60px;
+            height: 60px;
+            background: var(--primary-blue);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+            box-shadow: 0 4px 20px rgba(0, 102, 204, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        .chat-bubble:hover {
+            transform: scale(1.1);
+        }
+
+        .chat-interface {
+            position: absolute;
+            bottom: 80px;
+            right: 0;
+            width: 350px;
+            height: 500px;
+            background: var(--surface);
+            border-radius: 15px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+            display: none;
+            flex-direction: column;
+            overflow: hidden;
+        }
+
+        .chat-interface.active {
+            display: flex;
+            animation: slideUp 0.3s ease-out;
+        }
+
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .chat-header {
+            background: var(--primary-blue);
+            color: white;
+            padding: 1rem;
+            font-weight: 600;
+        }
+
+        .chat-messages {
+            flex: 1;
+            padding: 1rem;
+            overflow-y: auto;
+            background: #f8f9fa;
+        }
+
+        .chat-message {
+            margin-bottom: 1rem;
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .message-bot {
+            justify-content: flex-start;
+        }
+
+        .message-user {
+            justify-content: flex-end;
+        }
+
+        .message-bubble {
+            max-width: 80%;
+            padding: 0.75rem 1rem;
+            border-radius: 20px;
+            word-wrap: break-word;
+        }
+
+        .message-bot .message-bubble {
+            background: var(--surface);
+            border-bottom-left-radius: 5px;
+        }
+
+        .message-user .message-bubble {
+            background: var(--primary-blue);
+            color: white;
+            border-bottom-right-radius: 5px;
+        }
+
+        .chat-input-area {
+            padding: 1rem;
+            border-top: 1px solid var(--border);
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .chat-input {
+            flex: 1;
+            padding: 0.75rem;
+            border: 1px solid var(--border);
+            border-radius: 25px;
+            outline: none;
+        }
+
+        .chat-send {
+            background: var(--primary-blue);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .quick-actions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 0.5rem;
+        }
+
+        .quick-action {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            padding: 0.5rem 1rem;
+            border-radius: 15px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+        }
+
+        .quick-action:hover {
+            background: var(--primary-blue);
+            color: white;
+        }
+
+        /* Chart Containers */
+        .chart-container {
+            background: var(--surface);
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+            margin-bottom: 2rem;
+        }
+
+        .chart-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            text-align: center;
+        }
+
+        /* Mood Selector */
+        .mood-selector {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+
+        .mood-option {
+            text-align: center;
+            cursor: pointer;
+            padding: 1rem;
+            border-radius: 15px;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+        }
+
+        .mood-option:hover,
+        .mood-option.active {
+            border-color: var(--primary-blue);
+            background: rgba(0, 102, 204, 0.1);
+        }
+
+        .mood-icon {
+            font-size: 3rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .mood-label {
+            font-weight: 600;
+        }
+
+        /* Persona Cards */
+        .persona-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+
+        .persona-card {
+            background: var(--surface);
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 3px solid transparent;
+        }
+
+        .persona-card:hover,
+        .persona-card.active {
+            transform: translateY(-5px);
+            border-color: var(--primary-blue);
+        }
+
+        .persona-icon {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            margin: 0 auto 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 2rem;
+        }
+
+        /* Community Styles */
+        .community-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+
+        .community-stat {
+            background: var(--surface);
+            padding: 1.5rem;
+            border-radius: 15px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+            text-align: center;
+        }
+
+        .community-stat-icon {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            margin: 0 auto 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.5rem;
+        }
+
+        .community-stat-value {
+            font-size: 2rem;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+            color: var(--primary-blue);
+        }
+
+        .community-stat-label {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .nav-menu {
+                position: fixed;
+                left: -100%;
+                top: 70px;
+                flex-direction: column;
+                background-color: var(--surface);
+                width: 100%;
+                text-align: center;
+                transition: 0.3s;
+                box-shadow: 0 10px 27px rgba(0, 0, 0, 0.05);
+                padding: 2rem 0;
+            }
+
+            .nav-menu.active {
+                left: 0;
+            }
+
+            .nav-toggle {
+                display: flex;
+            }
+
+            .nav-toggle.active .bar:nth-child(2) {
+                opacity: 0;
+            }
+
+            .nav-toggle.active .bar:nth-child(1) {
+                transform: translateY(8px) rotate(45deg);
+            }
+
+            .nav-toggle.active .bar:nth-child(3) {
+                transform: translateY(-8px) rotate(-45deg);
+            }
+
+            .hero-title {
+                font-size: 2rem;
+            }
+
+            .main-content {
+                padding: 1rem;
+            }
+
+            .network-status {
+                grid-template-columns: 1fr;
+            }
+
+            .chat-interface {
+                width: calc(100vw - 40px);
+                right: 20px;
+            }
+
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .nav-container {
+                padding: 0 1rem;
+            }
+
+            .quick-stats {
+                grid-template-columns: 1fr;
+            }
+
+            .hero-section {
+                padding: 2rem 1rem;
+            }
+
+            .chat-interface {
+                bottom: 70px;
+                height: 400px;
+            }
+        }
+
+        /* Loading Animation */
+        .loading {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 3px solid rgba(255,255,255,.3);
+            border-radius: 50%;
+            border-top-color: #fff;
+            animation: spin 1s ease-in-out infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        /* Utility Classes */
+        .text-center { text-align: center; }
+        .mb-1 { margin-bottom: 1rem; }
+        .mb-2 { margin-bottom: 2rem; }
+        .mt-1 { margin-top: 1rem; }
+        .mt-2 { margin-top: 2rem; }
+        .p-1 { padding: 1rem; }
+        .p-2 { padding: 2rem; }
+        
+        .bg-blue { background: var(--primary-blue); }
+        .bg-purple { background: var(--secondary-purple); }
+        .bg-green { background: var(--accent-green); }
+        .bg-orange { background: var(--warning-orange); }
+        
+        .text-blue { color: var(--primary-blue); }
+        .text-purple { color: var(--secondary-purple); }
+        .text-green { color: var(--accent-green); }
+        .text-orange { color: var(--warning-orange); }
+    </style>
+</head>
+<body>
+    <!-- Navigation Header -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <div class="jio-logo">
+                    <div class="jio-dot"></div>
+                    <span>Jio</span>
+                </div>
+            </div>
+            <div class="nav-menu" id="nav-menu">
+                <a href="#" class="nav-item active" data-page="dashboard">
+                    <i class="fas fa-home"></i> Dashboard
+                </a>
+                <a href="#" class="nav-item" data-page="network">
+                    <i class="fas fa-signal"></i> Network Status
+                </a>
+                <a href="#" class="nav-item" data-page="predictive">
+                    <i class="fas fa-brain"></i> AI Hub
+                </a>
+                <a href="#" class="nav-item" data-page="emotional">
+                    <i class="fas fa-heart"></i> Support
+                </a>
+                <a href="#" class="nav-item" data-page="persona">
+                    <i class="fas fa-user-cog"></i> Personalize
+                </a>
+                <a href="#" class="nav-item" data-page="community">
+                    <i class="fas fa-users"></i> Community
+                </a>
+                <a href="#" class="nav-item" data-page="data">
+                    <i class="fas fa-chart-pie"></i> Data Hub
+                </a>
+            </div>
+            <div class="nav-toggle" id="nav-toggle">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content Area -->
+    <main class="main-content">
+        <div class="container">
+            <!-- Dashboard Page -->
+            <div id="dashboard" class="page active">
+                <section class="hero-section">
+                    <h1 class="hero-title">Welcome to Your Enhanced Jio Experience</h1>
+                    <p class="hero-subtitle">AI-powered insights, personalized support, and seamless connectivity at your fingertips</p>
+                </section>
+
+                <div class="quick-stats">
+                    <div class="stat-card">
+                        <div class="stat-icon bg-green">
+                            <i class="fas fa-signal"></i>
+                        </div>
+                        <div class="stat-value">99.4%</div>
+                        <div class="stat-label">Network Availability</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon bg-blue">
+                            <i class="fas fa-chart-line"></i>
+                        </div>
+                        <div class="stat-value">12.5 GB</div>
+                        <div class="stat-label">Data Used This Month</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon bg-purple">
+                            <i class="fas fa-users"></i>
+                        </div>
+                        <div class="stat-value">483M</div>
+                        <div class="stat-label">Jio Subscribers</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon bg-orange">
+                            <i class="fas fa-smile"></i>
+                        </div>
+                        <div class="stat-value">4.2/5</div>
+                        <div class="stat-label">Satisfaction Score</div>
+                    </div>
+                </div>
+
+                <h2 class="text-center mb-2">Enhanced Customer Experience Features</h2>
+                <div class="features-grid">
+                    <div class="feature-card" data-page="network">
+                        <div class="feature-icon bg-green">
+                            <i class="fas fa-wifi"></i>
+                        </div>
+                        <h3 class="feature-title">Real-Time Network Transparency</h3>
+                        <p class="feature-description">Live network status, coverage maps, and proactive issue alerts to keep you connected when it matters most.</p>
+                    </div>
+                    
+                    <div class="feature-card" data-page="predictive">
+                        <div class="feature-icon bg-blue">
+                            <i class="fas fa-brain"></i>
+                        </div>
+                        <h3 class="feature-title">AI-Powered Predictive Hub</h3>
+                        <p class="feature-description">Smart predictions and proactive solutions to prevent issues before they impact your experience.</p>
+                    </div>
+                    
+                    <div class="feature-card" data-page="emotional">
+                        <div class="feature-icon bg-purple">
+                            <i class="fas fa-heart"></i>
+                        </div>
+                        <h3 class="feature-title">Emotional Recovery System</h3>
+                        <p class="feature-description">Empathetic support with instant escalation and personalized recovery when things go wrong.</p>
+                    </div>
+                    
+                    <div class="feature-card" data-page="persona">
+                        <div class="feature-icon bg-orange">
+                            <i class="fas fa-user-cog"></i>
+                        </div>
+                        <h3 class="feature-title">Persona-Adaptive Interface</h3>
+                        <p class="feature-description">Customized experience tailored to your unique needs, whether you're a student, professional, or family.</p>
+                    </div>
+                    
+                    <div class="feature-card" data-page="community">
+                        <div class="feature-icon bg-green">
+                            <i class="fas fa-users"></i>
+                        </div>
+                        <h3 class="feature-title">Community Support Ecosystem</h3>
+                        <p class="feature-description">Connect with peers, get help from experts, and share solutions in our vibrant user community.</p>
+                    </div>
+                    
+                    <div class="feature-card" data-page="data">
+                        <div class="feature-icon bg-blue">
+                            <i class="fas fa-chart-pie"></i>
+                        </div>
+                        <h3 class="feature-title">Intelligent Data Optimization</h3>
+                        <p class="feature-description">Smart data management, family sharing controls, and AI-powered usage optimization tips.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Network Status Page -->
+            <div id="network" class="page">
+                <h1 class="text-center mb-2">Real-Time Network Transparency Dashboard</h1>
+                <p class="text-center text-secondary mb-2">Live network performance, coverage insights, and proactive maintenance updates</p>
+
+                <div class="network-status">
+                    <div class="network-map">
+                        <h3 class="mb-1">Network Coverage Map</h3>
+                        <div class="map-placeholder">
+                            <div>
+                                <i class="fas fa-map-marked-alt" style="font-size: 3rem; margin-bottom: 1rem; display: block;"></i>
+                                Interactive India Map<br>
+                                <small>99.4% Coverage • 66.7% 5G Available</small>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div>
+                        <h3 class="mb-1">Current Network Quality</h3>
+                        <div class="chart-container">
+                            <canvas id="networkChart" width="400" height="300"></canvas>
+                        </div>
+                    </div>
+                </div>
+
+                <h3 class="mb-1">Tower Status in Your Area</h3>
+                <div class="tower-status">
+                    <div class="tower-item tower-excellent">
+                        <h4>Mumbai Central</h4>
+                        <p><strong>Status:</strong> Excellent</p>
+                        <p><strong>Load:</strong> 65%</p>
+                        <p><strong>Speed:</strong> 285 Mbps</p>
+                    </div>
+                    <div class="tower-item tower-good">
+                        <h4>Delhi NCR</h4>
+                        <p><strong>Status:</strong> Good</p>
+                        <p><strong>Load:</strong> 78%</p>
+                        <p><strong>Speed:</strong> 220 Mbps</p>
+                    </div>
+                    <div class="tower-item tower-fair">
+                        <h4>Bangalore</h4>
+                        <p><strong>Status:</strong> Fair</p>
+                        <p><strong>Load:</strong> 85%</p>
+                        <p><strong>Speed:</strong> 180 Mbps</p>
+                    </div>
+                </div>
+
+                <div class="chart-container mt-2">
+                    <h3 class="chart-title">Planned Network Maintenance</h3>
+                    <div class="tower-status">
+                        <div class="tower-item" style="border-left-color: var(--warning-orange);">
+                            <h4>Andheri West</h4>
+                            <p><strong>Date:</strong> Tonight 2:00 AM - 4:00 AM</p>
+                            <p><strong>Impact:</strong> Temporary speed reduction</p>
+                            <p><strong>Reason:</strong> 5G infrastructure upgrade</p>
+                        </div>
+                        <div class="tower-item" style="border-left-color: var(--accent-green);">
+                            <h4>Bandra</h4>
+                            <p><strong>Date:</strong> Tomorrow 1:00 AM - 3:00 AM</p>
+                            <p><strong>Impact:</strong> No impact expected</p>
+                            <p><strong>Reason:</strong> Routine maintenance</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- AI Predictive Hub Page -->
+            <div id="predictive" class="page">
+                <h1 class="text-center mb-2">AI-Powered Predictive Experience Hub</h1>
+                <p class="text-center text-secondary mb-2">Smart predictions to prevent issues before they happen</p>
+
+                <div class="quick-stats">
+                    <div class="stat-card">
+                        <div class="stat-icon bg-blue">
+                            <i class="fas fa-exclamation-triangle"></i>
+                        </div>
+                        <div class="stat-value">3</div>
+                        <div class="stat-label">Predicted Issues</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon bg-green">
+                            <i class="fas fa-check-circle"></i>
+                        </div>
+                        <div class="stat-value">12</div>
+                        <div class="stat-label">Auto-Resolved</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon bg-purple">
+                            <i class="fas fa-clock"></i>
+                        </div>
+                        <div class="stat-value">48h</div>
+                        <div class="stat-label">Advance Warning</div>
+                    </div>
+                </div>
+
+                <div class="chart-container">
+                    <h3 class="chart-title">Predictive Issue Timeline</h3>
+                    <div class="tower-status">
+                        <div class="tower-item" style="border-left-color: var(--warning-orange);">
+                            <h4>Predicted Congestion</h4>
+                            <p><strong>Area:</strong> Andheri West</p>
+                            <p><strong>Time:</strong> Today 7:00 PM - 9:00 PM</p>
+                            <p><strong>Confidence:</strong> 87%</p>
+                            <p><strong>Recommendation:</strong> Switch to WiFi during peak hours</p>
+                        </div>
+                        <div class="tower-item" style="border-left-color: var(--accent-green);">
+                            <h4>Auto-Optimization Available</h4>
+                            <p><strong>Type:</strong> Data Plan Upgrade</p>
+                            <p><strong>Benefit:</strong> 25% faster speeds</p>
+                            <p><strong>Cost:</strong> ₹50/month additional</p>
+                            <button class="btn btn-primary mt-1">Apply Optimization</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="chart-container">
+                    <h3 class="chart-title">Smart Recommendations</h3>
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1rem;">
+                        <div class="feature-card">
+                            <div class="feature-icon bg-blue">
+                                <i class="fas fa-mobile-alt"></i>
+                            </div>
+                            <h4>Optimize for Work Calls</h4>
+                            <p>Your meeting pattern suggests enabling Call Priority Mode during 10 AM - 4 PM.</p>
+                            <button class="btn btn-primary">Enable Now</button>
+                        </div>
+                        <div class="feature-card">
+                            <div class="feature-icon bg-green">
+                                <i class="fas fa-gamepad"></i>
+                            </div>
+                            <h4>Gaming Mode Available</h4>
+                            <p>Reduce latency by 40% with Gaming Mode. Perfect for your evening gaming sessions.</p>
+                            <button class="btn btn-success">Activate Gaming Mode</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Emotional Recovery Page -->
+            <div id="emotional" class="page">
+                <h1 class="text-center mb-2">Emotional Journey Recovery System</h1>
+                <p class="text-center text-secondary mb-2">We understand your frustration. Let us make it right.</p>
+
+                <div class="chart-container">
+                    <h3 class="chart-title">How are you feeling about your Jio experience today?</h3>
+                    <div class="mood-selector">
+                        <div class="mood-option" data-mood="happy">
+                            <div class="mood-icon">😊</div>
+                            <div class="mood-label">Happy</div>
+                        </div>
+                        <div class="mood-option active" data-mood="neutral">
+                            <div class="mood-icon">😐</div>
+                            <div class="mood-label">Neutral</div>
+                        </div>
+                        <div class="mood-option" data-mood="frustrated">
+                            <div class="mood-icon">😤</div>
+                            <div class="mood-label">Frustrated</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="recovery-content">
+                    <div class="quick-stats">
+                        <div class="stat-card">
+                            <div class="stat-icon bg-orange">
+                                <i class="fas fa-clock"></i>
+                            </div>
+                            <div class="stat-value">< 30 sec</div>
+                            <div class="stat-label">Human Agent Connect</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-icon bg-green">
+                                <i class="fas fa-percentage"></i>
+                            </div>
+                            <div class="stat-value">87%</div>
+                            <div class="stat-label">First Call Resolution</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-icon bg-blue">
+                                <i class="fas fa-heart"></i>
+                            </div>
+                            <div class="stat-value">9.2/10</div>
+                            <div class="stat-label">Empathy Score</div>
+                        </div>
+                    </div>
+
+                    <div class="chart-container">
+                        <h3 class="chart-title">Instant Support Options</h3>
+                        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1rem;">
+                            <button class="btn btn-primary" style="padding: 1.5rem; height: auto;">
+                                <i class="fas fa-phone" style="display: block; font-size: 2rem; margin-bottom: 0.5rem;"></i>
+                                <strong>Call Priority Support</strong><br>
+                                <small>Connect to human agent in < 30 seconds</small>
+                            </button>
+                            <button class="btn btn-secondary" style="padding: 1.5rem; height: auto;">
+                                <i class="fas fa-comments" style="display: block; font-size: 2rem; margin-bottom: 0.5rem;"></i>
+                                <strong>Live Chat with Expert</strong><br>
+                                <small>Instant text support with screen sharing</small>
+                            </button>
+                            <button class="btn btn-warning" style="padding: 1.5rem; height: auto;">
+                                <i class="fas fa-gift" style="display: block; font-size: 2rem; margin-bottom: 0.5rem;"></i>
+                                <strong>Compensation Calculator</strong><br>
+                                <small>Automatic credits for service issues</small>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="chart-container">
+                    <h3 class="chart-title">Recent Resolution Success</h3>
+                    <canvas id="satisfactionChart" width="400" height="200"></canvas>
+                </div>
+            </div>
+
+            <!-- Persona Adaptive Page -->
+            <div id="persona" class="page">
+                <h1 class="text-center mb-2">Persona-Adaptive Interface</h1>
+                <p class="text-center text-secondary mb-2">Customize your Jio experience based on your lifestyle and needs</p>
+
+                <div class="chart-container">
+                    <h3 class="chart-title">Choose Your Profile</h3>
+                    <div class="persona-grid">
+                        <div class="persona-card" data-persona="digital-native">
+                            <div class="persona-icon bg-purple">
+                                <i class="fas fa-gamepad"></i>
+                            </div>
+                            <h4>Digital Native</h4>
+                            <p><strong>Age:</strong> 18-28</p>
+                            <p>Gaming, streaming, social media focused</p>
+                            <div class="mt-1">
+                                <span class="btn btn-primary btn-sm">Gaming Mode</span>
+                                <span class="btn btn-secondary btn-sm">Stream Priority</span>
+                            </div>
+                        </div>
+
+                        <div class="persona-card active" data-persona="professional">
+                            <div class="persona-icon bg-blue">
+                                <i class="fas fa-briefcase"></i>
+                            </div>
+                            <h4>Urban Professional</h4>
+                            <p><strong>Age:</strong> 25-40</p>
+                            <p>Work calls, productivity, reliability</p>
+                            <div class="mt-1">
+                                <span class="btn btn-primary btn-sm">Business Priority</span>
+                                <span class="btn btn-secondary btn-sm">Meeting Support</span>
+                            </div>
+                        </div>
+
+                        <div class="persona-card" data-persona="family">
+                            <div class="persona-icon bg-green">
+                                <i class="fas fa-home"></i>
+                            </div>
+                            <h4>Family Manager</h4>
+                            <p><strong>Age:</strong> 28-45</p>
+                            <p>Multiple connections, parental controls</p>
+                            <div class="mt-1">
+                                <span class="btn btn-primary btn-sm">Family Plans</span>
+                                <span class="btn btn-secondary btn-sm">Shared Data</span>
+                            </div>
+                        </div>
+
+                        <div class="persona-card" data-persona="rural">
+                            <div class="persona-icon bg-orange">
+                                <i class="fas fa-tractor"></i>
+                            </div>
+                            <h4>Rural Consumer</h4>
+                            <p><strong>Age:</strong> 25-60</p>
+                            <p>Basic connectivity, local language</p>
+                            <div class="mt-1">
+                                <span class="btn btn-primary btn-sm">Local Language</span>
+                                <span class="btn btn-secondary btn-sm">Offline Support</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="persona-content" class="chart-container">
+                    <h3 class="chart-title">Your Personalized Dashboard - Urban Professional</h3>
+                    <div class="quick-stats">
+                        <div class="stat-card">
+                            <div class="stat-icon bg-blue">
+                                <i class="fas fa-phone-volume"></i>
+                            </div>
+                            <div class="stat-value">98.5%</div>
+                            <div class="stat-label">Call Quality (Work Hours)</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-icon bg-green">
+                                <i class="fas fa-video"></i>
+                            </div>
+                            <div class="stat-value">45</div>
+                            <div class="stat-label">Video Calls This Month</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-icon bg-purple">
+                                <i class="fas fa-chart-line"></i>
+                            </div>
+                            <div class="stat-value">15 GB</div>
+                            <div class="stat-label">Business Data Usage</div>
+                        </div>
+                    </div>
+
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1rem; margin-top: 1rem;">
+                        <div class="feature-card">
+                            <h4>Meeting Quality Guarantee</h4>
+                            <p>Priority network access during business hours (9 AM - 6 PM)</p>
+                            <span class="btn btn-success">Enabled</span>
+                        </div>
+                        <div class="feature-card">
+                            <h4>Productivity Analytics</h4>
+                            <p>Track your connectivity patterns and optimize for work efficiency</p>
+                            <button class="btn btn-primary">View Report</button>
+                        </div>
+                        <div class="feature-card">
+                            <h4>Business Continuity Backup</h4>
+                            <p>Automatic hotspot sharing if primary connection fails</p>
+                            <button class="btn btn-secondary">Configure</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Community Page -->
+            <div id="community" class="page">
+                <h1 class="text-center mb-2">Community-Driven Support Ecosystem</h1>
+                <p class="text-center text-secondary mb-2">Connect with peers, share solutions, and get help from expert users</p>
+
+                <div class="community-stats">
+                    <div class="community-stat">
+                        <div class="community-stat-icon bg-blue">
+                            <i class="fas fa-users"></i>
+                        </div>
+                        <div class="community-stat-value">12,500</div>
+                        <div class="community-stat-label">Active Community Members</div>
+                    </div>
+                    <div class="community-stat">
+                        <div class="community-stat-icon bg-green">
+                            <i class="fas fa-check-circle"></i>
+                        </div>
+                        <div class="community-stat-value">8,900</div>
+                        <div class="community-stat-label">Issues Resolved</div>
+                    </div>
+                    <div class="community-stat">
+                        <div class="community-stat-icon bg-purple">
+                            <i class="fas fa-star"></i>
+                        </div>
+                        <div class="community-stat-value">450</div>
+                        <div class="community-stat-label">Expert Users</div>
+                    </div>
+                    <div class="community-stat">
+                        <div class="community-stat-icon bg-orange">
+                            <i class="fas fa-clock"></i>
+                        </div>
+                        <div class="community-stat-value">4 min</div>
+                        <div class="community-stat-label">Avg Response Time</div>
+                    </div>
+                </div>
+
+                <div class="chart-container">
+                    <h3 class="chart-title">Recent Community Discussions</h3>
+                    <div style="display: grid; gap: 1rem;">
+                        <div class="feature-card" style="display: flex; align-items: center; gap: 1rem;">
+                            <div style="width: 50px; height: 50px; background: var(--accent-green); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white;">
+                                <i class="fas fa-user"></i>
+                            </div>
+                            <div style="flex: 1;">
+                                <h4 style="margin-bottom: 0.5rem;">How to fix slow 5G speeds in Mumbai?</h4>
+                                <p style="margin-bottom: 0.5rem; color: var(--text-secondary);">Posted by Rahul_Tech • 2 hours ago • 15 replies</p>
+                                <div>
+                                    <span style="background: var(--accent-green); color: white; padding: 0.25rem 0.5rem; border-radius: 15px; font-size: 0.8rem;">✓ Solved</span>
+                                    <span style="background: var(--primary-blue); color: white; padding: 0.25rem 0.5rem; border-radius: 15px; font-size: 0.8rem; margin-left: 0.5rem;">Network</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="feature-card" style="display: flex; align-items: center; gap: 1rem;">
+                            <div style="width: 50px; height: 50px; background: var(--secondary-purple); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white;">
+                                <i class="fas fa-user"></i>
+                            </div>
+                            <div style="flex: 1;">
+                                <h4 style="margin-bottom: 0.5rem;">Best family plan for 4 connections?</h4>
+                                <p style="margin-bottom: 0.5rem; color: var(--text-secondary);">Posted by FamilyMom • 5 hours ago • 8 replies</p>
+                                <div>
+                                    <span style="background: var(--warning-orange); color: white; padding: 0.25rem 0.5rem; border-radius: 15px; font-size: 0.8rem;">Needs Help</span>
+                                    <span style="background: var(--secondary-purple); color: white; padding: 0.25rem 0.5rem; border-radius: 15px; font-size: 0.8rem; margin-left: 0.5rem;">Plans</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="feature-card" style="display: flex; align-items: center; gap: 1rem;">
+                            <div style="width: 50px; height: 50px; background: var(--warning-orange); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white;">
+                                <i class="fas fa-star"></i>
+                            </div>
+                            <div style="flex: 1;">
+                                <h4 style="margin-bottom: 0.5rem;">JioFiber setup guide for rural areas</h4>
+                                <p style="margin-bottom: 0.5rem; color: var(--text-secondary);">Posted by TechExpert_Jio • 1 day ago • 25 replies</p>
+                                <div>
+                                    <span style="background: var(--warning-orange); color: white; padding: 0.25rem 0.5rem; border-radius: 15px; font-size: 0.8rem;">Expert Guide</span>
+                                    <span style="background: var(--accent-green); color: white; padding: 0.25rem 0.5rem; border-radius: 15px; font-size: 0.8rem; margin-left: 0.5rem;">Setup</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1rem;">
+                    <div class="chart-container">
+                        <h3 class="chart-title">Ask the Community</h3>
+                        <textarea placeholder="Describe your issue..." style="width: 100%; padding: 1rem; border: 1px solid var(--border); border-radius: 10px; margin-bottom: 1rem; resize: vertical; min-height: 100px;"></textarea>
+                        <button class="btn btn-primary" style="width: 100%;">Post Question</button>
+                    </div>
+
+                    <div class="chart-container">
+                        <h3 class="chart-title">Expert Help Available</h3>
+                        <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 1rem;">
+                            <div style="width: 40px; height: 40px; background: var(--accent-green); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white;">
+                                <i class="fas fa-star"></i>
+                            </div>
+                            <div>
+                                <strong>TechGuru_Mumbai</strong><br>
+                                <small>Network Specialist • 500+ solutions</small>
+                            </div>
+                            <button class="btn btn-primary btn-sm">Message</button>
+                        </div>
+                        <div style="display: flex; align-items: center; gap: 1rem;">
+                            <div style="width: 40px; height: 40px; background: var(--secondary-purple); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white;">
+                                <i class="fas fa-star"></i>
+                            </div>
+                            <div>
+                                <strong>JioExpert_Delhi</strong><br>
+                                <small>Plan Advisor • 350+ solutions</small>
+                            </div>
+                            <button class="btn btn-primary btn-sm">Message</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Data Hub Page -->
+            <div id="data" class="page">
+                <h1 class="text-center mb-2">Intelligent Data Usage Optimization Hub</h1>
+                <p class="text-center text-secondary mb-2">Smart data management, family sharing, and AI-powered optimization</p>
+
+                <div class="quick-stats">
+                    <div class="stat-card">
+                        <div class="stat-icon bg-blue">
+                            <i class="fas fa-chart-pie"></i>
+                        </div>
+                        <div class="stat-value">12.5 GB</div>
+                        <div class="stat-label">Used This Month</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon bg-green">
+                            <i class="fas fa-battery-three-quarters"></i>
+                        </div>
+                        <div class="stat-value">17.5 GB</div>
+                        <div class="stat-label">Remaining</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon bg-purple">
+                            <i class="fas fa-users"></i>
+                        </div>
+                        <div class="stat-value">3</div>
+                        <div class="stat-label">Family Members</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon bg-orange">
+                            <i class="fas fa-piggy-bank"></i>
+                        </div>
+                        <div class="stat-value">₹150</div>
+                        <div class="stat-label">Saved This Month</div>
+                    </div>
+                </div>
+
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 2rem;">
+                    <div class="chart-container">
+                        <h3 class="chart-title">Data Usage Analytics</h3>
+                        <canvas id="dataUsageChart" width="400" height="300"></canvas>
+                    </div>
+
+                    <div class="chart-container">
+                        <h3 class="chart-title">Family Data Sharing</h3>
+                        <div style="margin-bottom: 1rem;">
+                            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem;">
+                                <span>You</span>
+                                <span><strong>12.5 GB</strong></span>
+                            </div>
+                            <div style="width: 100%; height: 10px; background: var(--border); border-radius: 5px; overflow: hidden;">
+                                <div style="width: 42%; height: 100%; background: var(--primary-blue);"></div>
+                            </div>
+                        </div>
+
+                        <div style="margin-bottom: 1rem;">
+                            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem;">
+                                <span>Family Member 1</span>
+                                <span><strong>8.2 GB</strong></span>
+                            </div>
+                            <div style="width: 100%; height: 10px; background: var(--border); border-radius: 5px; overflow: hidden;">
+                                <div style="width: 27%; height: 100%; background: var(--accent-green);"></div>
+                            </div>
+                        </div>
+
+                        <div style="margin-bottom: 1rem;">
+                            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem;">
+                                <span>Family Member 2</span>
+                                <span><strong>5.1 GB</strong></span>
+                            </div>
+                            <div style="width: 100%; height: 10px; background: var(--border); border-radius: 5px; overflow: hidden;">
+                                <div style="width: 17%; height: 100%; background: var(--secondary-purple);"></div>
+                            </div>
+                        </div>
+
+                        <button class="btn btn-primary" style="width: 100%; margin-top: 1rem;">Redistribute Data</button>
+                    </div>
+                </div>
+
+                <div class="chart-container mt-2">
+                    <h3 class="chart-title">AI Optimization Suggestions</h3>
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1rem;">
+                        <div class="feature-card">
+                            <div class="feature-icon bg-green">
+                                <i class="fas fa-lightbulb"></i>
+                            </div>
+                            <h4>Smart Data Saver</h4>
+                            <p>Enable automatic compression for social media. Can save up to 2GB monthly.</p>
+                            <button class="btn btn-success">Enable Now</button>
+                        </div>
+
+                        <div class="feature-card">
+                            <div class="feature-icon bg-blue">
+                                <i class="fas fa-clock"></i>
+                            </div>
+                            <h4>Off-Peak Downloads</h4>
+                            <p>Schedule large downloads during 2-6 AM for unlimited data access.</p>
+                            <button class="btn btn-primary">Set Schedule</button>
+                        </div>
+
+                        <div class="feature-card">
+                            <div class="feature-icon bg-orange">
+                                <i class="fas fa-shield-alt"></i>
+                            </div>
+                            <h4>Emergency Data Reserve</h4>
+                            <p>Keep 2GB reserved for emergency use. Access with one-tap when needed.</p>
+                            <button class="btn btn-warning">Setup Reserve</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Floating Chatbot -->
+    <div class="chat-widget">
+        <div class="chat-interface" id="chat-interface">
+            <div class="chat-header">
+                <div style="display: flex; justify-content: space-between; align-items: center;">
+                    <div>
+                        <strong>JioBot Assistant</strong><br>
+                        <small>Online • Avg response: 2 sec</small>
+                    </div>
+                    <button id="close-chat" style="background: none; border: none; color: white; font-size: 1.2rem; cursor: pointer;">×</button>
+                </div>
+            </div>
+            <div class="chat-messages" id="chat-messages">
+                <div class="chat-message message-bot">
+                    <div class="message-bubble">
+                        Hi! I'm JioBot, your AI assistant. How can I help you today?
+                    </div>
+                </div>
+                <div class="quick-actions">
+                    <div class="quick-action" data-message="My internet is slow">Network Issue</div>
+                    <div class="quick-action" data-message="Check my data balance">Data Balance</div>
+                    <div class="quick-action" data-message="Recharge my plan">Recharge</div>
+                    <div class="quick-action" data-message="Talk to human agent">Human Support</div>
+                </div>
+            </div>
+            <div class="chat-input-area">
+                <input type="text" class="chat-input" id="chat-input" placeholder="Type your message...">
+                <button class="chat-send" id="chat-send">
+                    <i class="fas fa-paper-plane"></i>
+                </button>
+            </div>
+        </div>
+        <div class="chat-bubble" id="chat-bubble">
+            <i class="fas fa-comments"></i>
+        </div>
+    </div>
+
+    <script>
+        // Enhanced MyJio Application JavaScript with AI Chatbot
+        class JioApp {
+            constructor() {
+                this.currentPage = 'dashboard';
+                this.currentMood = 'neutral';
+                this.currentPersona = 'professional';
+                this.charts = {};
+                this.chatbot = new JioChatbot();
+                
+                this.init();
+            }
+
+            init() {
+                this.setupNavigation();
+                this.setupMobileMenu();
+                this.setupInteractiveElements();
+                this.initializeCharts();
+                this.loadPage('dashboard');
+            }
+
+            setupNavigation() {
+                const navItems = document.querySelectorAll('.nav-item');
+                const featureCards = document.querySelectorAll('.feature-card');
+
+                navItems.forEach(item => {
+                    item.addEventListener('click', (e) => {
+                        e.preventDefault();
+                        const targetPage = item.getAttribute('data-page');
+                        this.loadPage(targetPage);
+                        this.updateActiveNavItem(item);
+                    });
+                });
+
+                featureCards.forEach(card => {
+                    card.addEventListener('click', () => {
+                        const targetPage = card.getAttribute('data-page');
+                        this.loadPage(targetPage);
+                        this.updateActiveNavItem(document.querySelector(`[data-page="${targetPage}"]`));
+                    });
+                });
+            }
+
+            setupMobileMenu() {
+                const navToggle = document.getElementById('nav-toggle');
+                const navMenu = document.getElementById('nav-menu');
+
+                navToggle.addEventListener('click', () => {
+                    navMenu.classList.toggle('active');
+                    navToggle.classList.toggle('active');
+                });
+
+                document.querySelectorAll('.nav-item').forEach(item => {
+                    item.addEventListener('click', () => {
+                        navMenu.classList.remove('active');
+                        navToggle.classList.remove('active');
+                    });
+                });
+            }
+
+            setupInteractiveElements() {
+                this.setupMoodSelector();
+                this.setupPersonaSelector();
+            }
+
+            setupMoodSelector() {
+                const moodOptions = document.querySelectorAll('.mood-option');
+                moodOptions.forEach(option => {
+                    option.addEventListener('click', () => {
+                        moodOptions.forEach(opt => opt.classList.remove('active'));
+                        option.classList.add('active');
+                        this.currentMood = option.getAttribute('data-mood');
+                        this.updateMoodContent();
+                    });
+                });
+            }
+
+            setupPersonaSelector() {
+                const personaCards = document.querySelectorAll('.persona-card');
+                personaCards.forEach(card => {
+                    card.addEventListener('click', () => {
+                        personaCards.forEach(c => c.classList.remove('active'));
+                        card.classList.add('active');
+                        this.currentPersona = card.getAttribute('data-persona');
+                        this.updatePersonaContent();
+                    });
+                });
+            }
+
+            updateMoodContent() {
+                const recoveryContent = document.getElementById('recovery-content');
+                if (!recoveryContent) return;
+
+                if (this.currentMood === 'frustrated') {
+                    recoveryContent.innerHTML = `
+                        <div class="chart-container" style="background: linear-gradient(135deg, #fee2e2, #fecaca); border-left: 4px solid #ef4444;">
+                            <h3 style="color: #dc2626;">We're sorry you're having a frustrating experience! 😔</h3>
+                            <p style="font-size: 1.1rem; margin: 1rem 0;">Your satisfaction is our priority. Let us connect you with a specialist immediately.</p>
+                            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem;">
+                                <button class="btn btn-primary" style="padding: 1rem; background: #dc2626;">
+                                    <i class="fas fa-phone"></i><br>
+                                    <strong>Urgent Call Back</strong><br>
+                                    <small>Within 30 seconds</small>
+                                </button>
+                                <button class="btn btn-warning" style="padding: 1rem;">
+                                    <i class="fas fa-gift"></i><br>
+                                    <strong>Instant Compensation</strong><br>
+                                    <small>₹100 credit applied</small>
+                                </button>
+                                <button class="btn btn-success" style="padding: 1rem;">
+                                    <i class="fas fa-user-tie"></i><br>
+                                    <strong>Senior Manager</strong><br>
+                                    <small>Escalate immediately</small>
+                                </button>
+                            </div>
+                        </div>
+                    `;
+                } else if (this.currentMood === 'happy') {
+                    recoveryContent.innerHTML = `
+                        <div class="chart-container" style="background: linear-gradient(135deg, #d1fae5, #a7f3d0); border-left: 4px solid #10b981;">
+                            <h3 style="color: #059669;">Great to hear you're happy with Jio! 😊</h3>
+                            <p style="font-size: 1.1rem; margin: 1rem 0;">Would you like to explore some premium features or share your experience?</p>
+                            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem;">
+                                <button class="btn btn-success" style="padding: 1rem;">
+                                    <i class="fas fa-star"></i><br>
+                                    <strong>Rate Experience</strong><br>
+                                    <small>Help others discover Jio</small>
+                                </button>
+                                <button class="btn btn-primary" style="padding: 1rem;">
+                                    <i class="fas fa-crown"></i><br>
+                                    <strong>Upgrade to Premium</strong><br>
+                                    <small>Exclusive benefits await</small>
+                                </button>
+                                <button class="btn btn-secondary" style="padding: 1rem;">
+                                    <i class="fas fa-share-alt"></i><br>
+                                    <strong>Refer Friends</strong><br>
+                                    <small>Earn rewards together</small>
+                                </button>
+                            </div>
+                        </div>
+                    `;
+                }
+            }
+
+            updatePersonaContent() {
+                const content = document.getElementById('persona-content');
+                if (!content) return;
+
+                const personaData = {
+                    'digital-native': {
+                        title: 'Your Personalized Dashboard - Digital Native',
+                        stats: [
+                            { icon: 'fas fa-gamepad', value: '15ms', label: 'Gaming Latency', color: 'purple' },
+                            { icon: 'fas fa-video', value: '4K', label: 'Streaming Quality', color: 'blue' },
+                            { icon: 'fas fa-download', value: '500 Mbps', label: 'Peak Download', color: 'green' }
+                        ],
+                        features: [
+                            { title: 'Gaming Mode Pro', desc: 'Ultra-low latency for competitive gaming', action: 'Activated' },
+                            { title: 'Stream Anywhere', desc: '4K streaming without buffering', action: 'Enable' },
+                            { title: 'Social Data Boost', desc: 'Unlimited social media during peak hours', action: 'Configure' }
+                        ]
+                    },
+                    'family': {
+                        title: 'Your Personalized Dashboard - Family Manager',
+                        stats: [
+                            { icon: 'fas fa-shield-alt', value: '100%', label: 'Parental Control Active', color: 'green' },
+                            { icon: 'fas fa-users', value: '4', label: 'Connected Devices', color: 'blue' },
+                            { icon: 'fas fa-clock', value: '6 hrs', label: 'Screen Time Today', color: 'orange' }
+                        ],
+                        features: [
+                            { title: 'Family Safety Plus', desc: 'Advanced content filtering for children', action: 'Active' },
+                            { title: 'Shared Entertainment', desc: 'Multiple OTT accounts for family', action: 'Manage' },
+                            { title: 'Data Pool Manager', desc: 'Smart allocation across family members', action: 'Optimize' }
+                        ]
+                    },
+                    'rural': {
+                        title: 'Your Personalized Dashboard - Rural Consumer',
+                        stats: [
+                            { icon: 'fas fa-map-marker-alt', value: '95%', label: 'Local Coverage', color: 'green' },
+                            { icon: 'fas fa-language', value: 'Hindi', label: 'Preferred Language', color: 'orange' },
+                            { icon: 'fas fa-rupee-sign', value: '₹199', label: 'Perfect Plan', color: 'blue' }
+                        ],
+                        features: [
+                            { title: 'Regional Language UI', desc: 'Complete interface in your local language', action: 'Active' },
+                            { title: 'Offline Support', desc: 'Download guides for offline troubleshooting', action: 'Download' },
+                            { title: 'Community Connect', desc: 'Connect with local Jio users nearby', action: 'Join' }
+                        ]
+                    }
+                };
+
+                const data = personaData[this.currentPersona] || personaData['professional'];
+                
+                content.innerHTML = `
+                    <h3 class="chart-title">${data.title}</h3>
+                    <div class="quick-stats">
+                        ${data.stats.map(stat => `
+                            <div class="stat-card">
+                                <div class="stat-icon bg-${stat.color}">
+                                    <i class="${stat.icon}"></i>
+                                </div>
+                                <div class="stat-value">${stat.value}</div>
+                                <div class="stat-label">${stat.label}</div>
+                            </div>
+                        `).join('')}
+                    </div>
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1rem; margin-top: 1rem;">
+                        ${data.features.map(feature => `
+                            <div class="feature-card">
+                                <h4>${feature.title}</h4>
+                                <p>${feature.desc}</p>
+                                <button class="btn ${feature.action === 'Active' || feature.action === 'Activated' ? 'btn-success' : 'btn-primary'}">${feature.action}</button>
+                            </div>
+                        `).join('')}
+                    </div>
+                `;
+            }
+
+            loadPage(pageId) {
+                // Hide all pages
+                document.querySelectorAll('.page').forEach(page => {
+                    page.classList.remove('active');
+                });
+
+                // Show target page
+                const targetPage = document.getElementById(pageId);
+                if (targetPage) {
+                    targetPage.classList.add('active');
+                    this.currentPage = pageId;
+                }
+
+                // Initialize page-specific functionality
+                setTimeout(() => {
+                    this.initializePageCharts(pageId);
+                }, 100);
+            }
+
+            updateActiveNavItem(activeItem) {
+                document.querySelectorAll('.nav-item').forEach(item => {
+                    item.classList.remove('active');
+                });
+                activeItem.classList.add('active');
+            }
+
+            initializeCharts() {
+                // Initialize charts after a small delay to ensure DOM is ready
+                setTimeout(() => {
+                    this.initializePageCharts(this.currentPage);
+                }, 200);
+            }
+
+            initializePageCharts(pageId) {
+                if (pageId === 'network') {
+                    this.createNetworkChart();
+                } else if (pageId === 'emotional') {
+                    this.createSatisfactionChart();
+                } else if (pageId === 'data') {
+                    this.createDataUsageChart();
+                }
+            }
+
+            createNetworkChart() {
+                const ctx = document.getElementById('networkChart');
+                if (!ctx) return;
+
+                if (this.charts.network) {
+                    this.charts.network.destroy();
+                }
+
+                this.charts.network = new Chart(ctx, {
+                    type: 'doughnut',
+                    data: {
+                        labels: ['5G Coverage', '4G Coverage', 'No Coverage'],
+                        datasets: [{
+                            data: [67, 32, 1],
+                            backgroundColor: ['#10B981', '#0066CC', '#EF4444'],
+                            borderWidth: 0
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        plugins: {
+                            legend: {
+                                position: 'bottom'
+                            }
+                        }
+                    }
+                });
+            }
+
+            createSatisfactionChart() {
+                const ctx = document.getElementById('satisfactionChart');
+                if (!ctx) return;
+
+                if (this.charts.satisfaction) {
+                    this.charts.satisfaction.destroy();
+                }
+
+                this.charts.satisfaction = new Chart(ctx, {
+                    type: 'line',
+                    data: {
+                        labels: ['Week 1', 'Week 2', 'Week 3', 'Week 4'],
+                        datasets: [{
+                            label: 'Resolution Success Rate',
+                            data: [65, 72, 85, 87],
+                            borderColor: '#10B981',
+                            backgroundColor: 'rgba(16, 185, 129, 0.1)',
+                            tension: 0.4,
+                            fill: true
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        plugins: {
+                            legend: {
+                                display: false
+                            }
+                        },
+                        scales: {
+                            y: {
+                                beginAtZero: true,
+                                max: 100
+                            }
+                        }
+                    }
+                });
+            }
+
+            createDataUsageChart() {
+                const ctx = document.getElementById('dataUsageChart');
+                if (!ctx) return;
+
+                if (this.charts.dataUsage) {
+                    this.charts.dataUsage.destroy();
+                }
+
+                this.charts.dataUsage = new Chart(ctx, {
+                    type: 'bar',
+                    data: {
+                        labels: ['Week 1', 'Week 2', 'Week 3', 'Week 4'],
+                        datasets: [{
+                            label: 'Data Usage (GB)',
+                            data: [2.5, 3.2, 3.8, 3.0],
+                            backgroundColor: '#0066CC',
+                            borderRadius: 8
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        plugins: {
+                            legend: {
+                                display: false
+                            }
+                        },
+                        scales: {
+                            y: {
+                                beginAtZero: true
+                            }
+                        }
+                    }
+                });
+            }
+        }
+
+        // Chatbot Class
+        class JioChatbot {
+            constructor() {
+                this.isOpen = false;
+                this.responses = {
+                    greetings: [
+                        "Hi! I'm JioBot, your AI assistant. How can I help you today?",
+                        "Hello! Welcome to Jio support. What can I assist you with?"
+                    ],
+                    networkIssues: [
+                        "I understand you're facing network issues. Let me help you troubleshoot this step by step.",
+                        "Network problems can be frustrating. Can you tell me your location so I can check the tower status?"
+                    ],
+                    dataUsage: [
+                        "Your current data usage is 12.5 GB out of 30 GB. You have 17.5 GB remaining.",
+                        "I can help you optimize your data usage. Would you like some tips?"
+                    ],
+                    billing: [
+                        "I can help you with billing queries. What specific information do you need?",
+                        "For billing support, I can check your current plan and payment status."
+                    ],
+                    recharge: [
+                        "I can help you recharge your plan. Your current plan expires in 15 days.",
+                        "Would you like me to show you available recharge options?"
+                    ],
+                    humanAgent: [
+                        "I'm connecting you to a human agent. Please wait while I transfer you.",
+                        "A human agent will be with you shortly. Your estimated wait time is less than 2 minutes."
+                    ],
+                    default: [
+                        "I'm here to help! You can ask me about network issues, data usage, billing, or technical support.",
+                        "Sorry, I didn't understand that. Can you please rephrase your question?"
+                    ]
+                };
+
+                this.init();
+            }
+
+            init() {
+                this.setupChatWidget();
+            }
+
+            setupChatWidget() {
+                const chatBubble = document.getElementById('chat-bubble');
+                const chatInterface = document.getElementById('chat-interface');
+                const closeChat = document.getElementById('close-chat');
+                const chatSend = document.getElementById('chat-send');
+                const chatInput = document.getElementById('chat-input');
+                const quickActions = document.querySelectorAll('.quick-action');
+
+                chatBubble.addEventListener('click', () => {
+                    this.toggleChat();
+                });
+
+                closeChat.addEventListener('click', () => {
+                    this.closeChat();
+                });
+
+                chatSend.addEventListener('click', () => {
+                    this.sendMessage();
+                });
+
+                chatInput.addEventListener('keypress', (e) => {
+                    if (e.key === 'Enter') {
+                        this.sendMessage();
+                    }
+                });
+
+                quickActions.forEach(action => {
+                    action.addEventListener('click', () => {
+                        const message = action.getAttribute('data-message');
+                        this.handleQuickAction(message);
+                    });
+                });
+            }
+
+            toggleChat() {
+                const chatInterface = document.getElementById('chat-interface');
+                this.isOpen = !this.isOpen;
+                
+                if (this.isOpen) {
+                    chatInterface.classList.add('active');
+                } else {
+                    chatInterface.classList.remove('active');
+                }
+            }
+
+            closeChat() {
+                const chatInterface = document.getElementById('chat-interface');
+                chatInterface.classList.remove('active');
+                this.isOpen = false;
+            }
+
+            sendMessage() {
+                const chatInput = document.getElementById('chat-input');
+                const message = chatInput.value.trim();
+                
+                if (message) {
+                    this.addMessage(message, 'user');
+                    chatInput.value = '';
+                    
+                    // Simulate typing indicator
+                    this.showTyping();
+                    
+                    setTimeout(() => {
+                        this.hideTyping();
+                        const response = this.generateResponse(message);
+                        this.addMessage(response, 'bot');
+                    }, 1500);
+                }
+            }
+
+            handleQuickAction(message) {
+                this.addMessage(message, 'user');
+                
+                setTimeout(() => {
+                    const response = this.generateResponse(message);
+                    this.addMessage(response, 'bot');
+                }, 1000);
+            }
+
+            addMessage(text, sender) {
+                const messagesContainer = document.getElementById('chat-messages');
+                const messageDiv = document.createElement('div');
+                messageDiv.className = `chat-message message-${sender}`;
+                
+                const messageContent = document.createElement('div');
+                messageContent.className = 'message-bubble';
+                messageContent.textContent = text;
+                
+                messageDiv.appendChild(messageContent);
+                messagesContainer.appendChild(messageDiv);
+                
+                // Scroll to bottom
+                messagesContainer.scrollTop = messagesContainer.scrollHeight;
+            }
+
+            showTyping() {
+                const messagesContainer = document.getElementById('chat-messages');
+                const typingDiv = document.createElement('div');
+                typingDiv.className = 'chat-message message-bot typing-indicator';
+                typingDiv.innerHTML = `
+                    <div class="message-bubble">
+                        <div class="loading"></div> JioBot is typing...
+                    </div>
+                `;
+                messagesContainer.appendChild(typingDiv);
+                messagesContainer.scrollTop = messagesContainer.scrollHeight;
+            }
+
+            hideTyping() {
+                const typingIndicator = document.querySelector('.typing-indicator');
+                if (typingIndicator) {
+                    typingIndicator.remove();
+                }
+            }
+
+            generateResponse(message) {
+                const lowerMessage = message.toLowerCase();
+                
+                if (lowerMessage.includes('slow') || lowerMessage.includes('network') || lowerMessage.includes('internet')) {
+                    return this.getRandomResponse('networkIssues');
+                } else if (lowerMessage.includes('data') || lowerMessage.includes('balance')) {
+                    return this.getRandomResponse('dataUsage');
+                } else if (lowerMessage.includes('bill') || lowerMessage.includes('payment')) {
+                    return this.getRandomResponse('billing');
+                } else if (lowerMessage.includes('recharge') || lowerMessage.includes('plan')) {
+                    return this.getRandomResponse('recharge');
+                } else if (lowerMessage.includes('human') || lowerMessage.includes('agent') || lowerMessage.includes('support')) {
+                    return this.getRandomResponse('humanAgent');
+                } else if (lowerMessage.includes('hello') || lowerMessage.includes('hi') || lowerMessage.includes('hey')) {
+                    return this.getRandomResponse('greetings');
+                } else {
+                    return this.getRandomResponse('default');
+                }
+            }
+
+            getRandomResponse(category) {
+                const responses = this.responses[category] || this.responses.default;
+                return responses[Math.floor(Math.random() * responses.length)];
+            }
+        }
+
+        // Initialize the application
+        document.addEventListener('DOMContentLoaded', () => {
+            new JioApp();
+        });
+    </script>
+</body>
+</html>
