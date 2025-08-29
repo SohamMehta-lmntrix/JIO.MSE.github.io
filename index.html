@@ -1,0 +1,960 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MyJio - Enhanced Customer Experience Portal</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <!-- Navigation Header -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <div class="jio-logo">
+                    <div class="jio-dot"></div>
+                    <span>Jio</span>
+                </div>
+            </div>
+            <div class="nav-menu" id="nav-menu">
+                <a href="#" class="nav-item active" data-page="dashboard">
+                    <i class="fas fa-home"></i> Dashboard
+                </a>
+                <a href="#" class="nav-item" data-page="network">
+                    <i class="fas fa-signal"></i> Network Status
+                </a>
+                <a href="#" class="nav-item" data-page="predictive">
+                    <i class="fas fa-brain"></i> AI Hub
+                </a>
+                <a href="#" class="nav-item" data-page="emotional">
+                    <i class="fas fa-heart"></i> Support
+                </a>
+                <a href="#" class="nav-item" data-page="persona">
+                    <i class="fas fa-user-cog"></i> Personalize
+                </a>
+                <a href="#" class="nav-item" data-page="community">
+                    <i class="fas fa-users"></i> Community
+                </a>
+                <a href="#" class="nav-item" data-page="data">
+                    <i class="fas fa-chart-pie"></i> Data Hub
+                </a>
+            </div>
+            <div class="nav-toggle" id="nav-toggle">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <!-- Dashboard Page -->
+        <div id="dashboard" class="page active">
+            <div class="container">
+                <div class="hero-section">
+                    <div class="hero-content">
+                        <h1>Welcome to Enhanced MyJio</h1>
+                        <p>Experience next-generation customer service with AI-powered features</p>
+                        <div class="account-summary">
+                            <div class="account-card">
+                                <div class="account-info">
+                                    <span class="account-number">+91 9876543210</span>
+                                    <span class="account-plan">Jio Platinum Plus</span>
+                                </div>
+                                <div class="network-indicator">
+                                    <div class="signal-strength excellent">
+                                        <div class="bar"></div>
+                                        <div class="bar"></div>
+                                        <div class="bar"></div>
+                                        <div class="bar"></div>
+                                    </div>
+                                    <span>5G</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="feature-grid">
+                    <div class="feature-card" data-page="network">
+                        <div class="feature-icon">
+                            <i class="fas fa-signal"></i>
+                        </div>
+                        <h3>Network Transparency</h3>
+                        <p>Real-time network status, coverage maps, and congestion data</p>
+                        <div class="feature-stats">
+                            <span class="stat">99% Coverage</span>
+                            <span class="stat-indicator good"></span>
+                        </div>
+                    </div>
+
+                    <div class="feature-card" data-page="predictive">
+                        <div class="feature-icon">
+                            <i class="fas fa-brain"></i>
+                        </div>
+                        <h3>AI Predictive Hub</h3>
+                        <p>Proactive alerts and intelligent troubleshooting</p>
+                        <div class="feature-stats">
+                            <span class="stat">2 Active Alerts</span>
+                            <span class="stat-indicator warning"></span>
+                        </div>
+                    </div>
+
+                    <div class="feature-card" data-page="emotional">
+                        <div class="feature-icon">
+                            <i class="fas fa-heart"></i>
+                        </div>
+                        <h3>Emotional Recovery</h3>
+                        <p>Empathetic support and instant issue resolution</p>
+                        <div class="feature-stats">
+                            <span class="stat">NPS 7.2/10</span>
+                            <span class="stat-indicator good"></span>
+                        </div>
+                    </div>
+
+                    <div class="feature-card" data-page="persona">
+                        <div class="feature-icon">
+                            <i class="fas fa-user-cog"></i>
+                        </div>
+                        <h3>Smart Personalization</h3>
+                        <p>Adaptive interface based on your usage patterns</p>
+                        <div class="feature-stats">
+                            <span class="stat">Urban Professional</span>
+                            <span class="stat-indicator excellent"></span>
+                        </div>
+                    </div>
+
+                    <div class="feature-card" data-page="community">
+                        <div class="feature-icon">
+                            <i class="fas fa-users"></i>
+                        </div>
+                        <h3>Community Support</h3>
+                        <p>Peer assistance and expert user guidance</p>
+                        <div class="feature-stats">
+                            <span class="stat">12.5k Active Users</span>
+                            <span class="stat-indicator excellent"></span>
+                        </div>
+                    </div>
+
+                    <div class="feature-card" data-page="data">
+                        <div class="feature-icon">
+                            <i class="fas fa-chart-pie"></i>
+                        </div>
+                        <h3>Data Optimization</h3>
+                        <p>Smart data management and family sharing</p>
+                        <div class="feature-stats">
+                            <span class="stat">12.5GB Used</span>
+                            <span class="stat-indicator good"></span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="recent-activity">
+                    <h2>Recent Activity</h2>
+                    <div class="activity-feed">
+                        <div class="activity-item">
+                            <div class="activity-icon">
+                                <i class="fas fa-check-circle"></i>
+                            </div>
+                            <div class="activity-content">
+                                <p>Network issue in Andheri resolved automatically</p>
+                                <span class="activity-time">2 hours ago</span>
+                            </div>
+                        </div>
+                        <div class="activity-item">
+                            <div class="activity-icon">
+                                <i class="fas fa-bell"></i>
+                            </div>
+                            <div class="activity-content">
+                                <p>Data optimization saved 2.1GB this month</p>
+                                <span class="activity-time">1 day ago</span>
+                            </div>
+                        </div>
+                        <div class="activity-item">
+                            <div class="activity-icon">
+                                <i class="fas fa-users"></i>
+                            </div>
+                            <div class="activity-content">
+                                <p>Your solution helped 3 community members</p>
+                                <span class="activity-time">3 days ago</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Network Transparency Page -->
+        <div id="network" class="page">
+            <div class="container">
+                <div class="page-header">
+                    <h1>Real-Time Network Transparency</h1>
+                    <p>Live network status, coverage maps, and performance insights</p>
+                </div>
+
+                <div class="network-overview">
+                    <div class="network-card">
+                        <h3>Coverage Status</h3>
+                        <div class="coverage-stats">
+                            <div class="coverage-item">
+                                <span class="coverage-type">5G</span>
+                                <div class="progress-bar">
+                                    <div class="progress-fill" style="width: 67%"></div>
+                                </div>
+                                <span class="coverage-percent">67%</span>
+                            </div>
+                            <div class="coverage-item">
+                                <span class="coverage-type">4G</span>
+                                <div class="progress-bar">
+                                    <div class="progress-fill" style="width: 99%"></div>
+                                </div>
+                                <span class="coverage-percent">99%</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="network-card">
+                        <h3>Network Quality</h3>
+                        <div class="quality-chart">
+                            <canvas id="networkChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="tower-status">
+                    <h2>Tower Status</h2>
+                    <div class="tower-grid">
+                        <div class="tower-card excellent">
+                            <div class="tower-header">
+                                <h4>Mumbai Central</h4>
+                                <span class="tower-status">Excellent</span>
+                            </div>
+                            <div class="tower-load">
+                                <span>Load: 65%</span>
+                                <div class="load-bar">
+                                    <div class="load-fill" style="width: 65%"></div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="tower-card good">
+                            <div class="tower-header">
+                                <h4>Delhi NCR</h4>
+                                <span class="tower-status">Good</span>
+                            </div>
+                            <div class="tower-load">
+                                <span>Load: 78%</span>
+                                <div class="load-bar">
+                                    <div class="load-fill" style="width: 78%"></div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="tower-card fair">
+                            <div class="tower-header">
+                                <h4>Bangalore</h4>
+                                <span class="tower-status">Fair</span>
+                            </div>
+                            <div class="tower-load">
+                                <span>Load: 85%</span>
+                                <div class="load-bar">
+                                    <div class="load-fill" style="width: 85%"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="planned-maintenance">
+                    <h2>Planned Maintenance</h2>
+                    <div class="maintenance-timeline">
+                        <div class="maintenance-item">
+                            <div class="maintenance-time">2:00 AM - 4:00 AM</div>
+                            <div class="maintenance-details">
+                                <h4>Bandra Tower Upgrade</h4>
+                                <p>5G equipment installation - Low impact expected</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- AI Predictive Hub Page -->
+        <div id="predictive" class="page">
+            <div class="container">
+                <div class="page-header">
+                    <h1>AI-Powered Predictive Experience Hub</h1>
+                    <p>Proactive alerts and intelligent issue resolution</p>
+                </div>
+
+                <div class="alerts-section">
+                    <h2>Active Predictions</h2>
+                    <div class="alerts-grid">
+                        <div class="alert-card medium">
+                            <div class="alert-icon">
+                                <i class="fas fa-exclamation-triangle"></i>
+                            </div>
+                            <div class="alert-content">
+                                <h3>Predicted Congestion</h3>
+                                <p>Andheri West area expected congestion during 7:00 PM - 9:00 PM</p>
+                                <div class="alert-actions">
+                                    <button class="btn-primary">Enable Priority Mode</button>
+                                    <button class="btn-secondary">View Alternatives</button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="alert-card low">
+                            <div class="alert-icon">
+                                <i class="fas fa-tools"></i>
+                            </div>
+                            <div class="alert-content">
+                                <h3>Maintenance Notification</h3>
+                                <p>Scheduled maintenance in Bandra from 2:00 AM - 4:00 AM tomorrow</p>
+                                <div class="alert-actions">
+                                    <button class="btn-primary">Set Reminder</button>
+                                    <button class="btn-secondary">Dismiss</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="predictions-chart">
+                    <h2>Network Performance Forecast</h2>
+                    <div class="chart-container">
+                        <canvas id="predictiveChart"></canvas>
+                    </div>
+                </div>
+
+                <div class="smart-recommendations">
+                    <h2>Smart Recommendations</h2>
+                    <div class="recommendations-list">
+                        <div class="recommendation-item">
+                            <div class="recommendation-icon">
+                                <i class="fas fa-lightbulb"></i>
+                            </div>
+                            <div class="recommendation-content">
+                                <h4>Optimize Your Experience</h4>
+                                <p>Switch to 5G in your area for 40% faster speeds</p>
+                                <button class="btn-primary">Enable 5G</button>
+                            </div>
+                        </div>
+
+                        <div class="recommendation-item">
+                            <div class="recommendation-icon">
+                                <i class="fas fa-clock"></i>
+                            </div>
+                            <div class="recommendation-content">
+                                <h4>Peak Hour Insight</h4>
+                                <p>Your area has lower congestion between 2 PM - 4 PM</p>
+                                <button class="btn-secondary">Schedule Downloads</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Emotional Recovery Page -->
+        <div id="emotional" class="page">
+            <div class="container">
+                <div class="page-header">
+                    <h1>Emotional Journey Recovery System</h1>
+                    <p>Empathetic support designed to understand and resolve your concerns</p>
+                </div>
+
+                <div class="mood-indicator">
+                    <h2>How are you feeling today?</h2>
+                    <div class="mood-selector">
+                        <button class="mood-btn excellent" data-mood="excellent">
+                            <i class="fas fa-grin-hearts"></i>
+                            <span>Excellent</span>
+                        </button>
+                        <button class="mood-btn good" data-mood="good">
+                            <i class="fas fa-smile"></i>
+                            <span>Good</span>
+                        </button>
+                        <button class="mood-btn neutral active" data-mood="neutral">
+                            <i class="fas fa-meh"></i>
+                            <span>Neutral</span>
+                        </button>
+                        <button class="mood-btn poor" data-mood="poor">
+                            <i class="fas fa-frown"></i>
+                            <span>Poor</span>
+                        </button>
+                        <button class="mood-btn terrible" data-mood="terrible">
+                            <i class="fas fa-angry"></i>
+                            <span>Frustrated</span>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="satisfaction-metrics">
+                    <div class="metric-card">
+                        <h3>Your NPS Score</h3>
+                        <div class="score-display">
+                            <span class="score-number">7.2</span>
+                            <span class="score-label">/10</span>
+                        </div>
+                        <p>Above average satisfaction</p>
+                    </div>
+
+                    <div class="metric-card">
+                        <h3>Recent Issues</h3>
+                        <div class="score-display">
+                            <span class="score-number">2</span>
+                            <span class="score-label">issues</span>
+                        </div>
+                        <p>87% resolution rate</p>
+                    </div>
+                </div>
+
+                <div class="instant-support">
+                    <h2>Need Immediate Help?</h2>
+                    <div class="support-options">
+                        <button class="support-btn priority">
+                            <i class="fas fa-phone"></i>
+                            <div class="support-content">
+                                <h4>Priority Call</h4>
+                                <p>Connect with specialist in 30 seconds</p>
+                            </div>
+                        </button>
+
+                        <button class="support-btn chat">
+                            <i class="fas fa-comments"></i>
+                            <div class="support-content">
+                                <h4>Live Chat</h4>
+                                <p>Real-time assistance with AI support</p>
+                            </div>
+                        </button>
+
+                        <button class="support-btn escalate">
+                            <i class="fas fa-arrow-up"></i>
+                            <div class="support-content">
+                                <h4>Escalate Issue</h4>
+                                <p>Direct access to senior support team</p>
+                            </div>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="compensation-tracker">
+                    <h2>Service Credits & Compensation</h2>
+                    <div class="compensation-card">
+                        <div class="compensation-summary">
+                            <h4>Available Credits</h4>
+                            <span class="credit-amount">₹125</span>
+                        </div>
+                        <div class="compensation-history">
+                            <div class="credit-item">
+                                <span class="credit-reason">Network downtime compensation</span>
+                                <span class="credit-value">+ ₹75</span>
+                            </div>
+                            <div class="credit-item">
+                                <span class="credit-reason">Speed issue resolution</span>
+                                <span class="credit-value">+ ₹50</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Persona Adaptive Page -->
+        <div id="persona" class="page">
+            <div class="container">
+                <div class="page-header">
+                    <h1>Persona-Adaptive Interface System</h1>
+                    <p>Customize your experience based on your usage patterns and preferences</p>
+                </div>
+
+                <div class="persona-selector">
+                    <h2>Choose Your Profile</h2>
+                    <div class="persona-grid">
+                        <div class="persona-card digital-native" data-persona="digital-native">
+                            <div class="persona-icon">
+                                <i class="fas fa-gamepad"></i>
+                            </div>
+                            <h3>Digital Native</h3>
+                            <p>Gaming, streaming, and social media focused</p>
+                            <div class="persona-features">
+                                <span class="feature-tag">Gaming Mode</span>
+                                <span class="feature-tag">Streaming Priority</span>
+                                <span class="feature-tag">Social Data</span>
+                            </div>
+                        </div>
+
+                        <div class="persona-card professional active" data-persona="professional">
+                            <div class="persona-icon">
+                                <i class="fas fa-briefcase"></i>
+                            </div>
+                            <h3>Urban Professional</h3>
+                            <p>Business calls, meetings, and productivity</p>
+                            <div class="persona-features">
+                                <span class="feature-tag">Business Priority</span>
+                                <span class="feature-tag">Meeting Support</span>
+                                <span class="feature-tag">Productivity Tools</span>
+                            </div>
+                        </div>
+
+                        <div class="persona-card family" data-persona="family">
+                            <div class="persona-icon">
+                                <i class="fas fa-home"></i>
+                            </div>
+                            <h3>Family Manager</h3>
+                            <p>Family plans, controls, and shared data</p>
+                            <div class="persona-features">
+                                <span class="feature-tag">Family Plans</span>
+                                <span class="feature-tag">Parental Controls</span>
+                                <span class="feature-tag">Shared Data</span>
+                            </div>
+                        </div>
+
+                        <div class="persona-card rural" data-persona="rural">
+                            <div class="persona-icon">
+                                <i class="fas fa-tree"></i>
+                            </div>
+                            <h3>Rural Consumer</h3>
+                            <p>Basic connectivity with local language support</p>
+                            <div class="persona-features">
+                                <span class="feature-tag">Basic Connectivity</span>
+                                <span class="feature-tag">Local Language</span>
+                                <span class="feature-tag">Offline Support</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="persona-dashboard">
+                    <h2>Your Personalized Dashboard</h2>
+                    <div class="dashboard-preview" id="persona-preview">
+                        <!-- Dynamic content based on selected persona -->
+                        <div class="preview-card">
+                            <h4>Business Priority Features</h4>
+                            <ul>
+                                <li>Priority network access during business hours</li>
+                                <li>Enhanced call quality for meetings</li>
+                                <li>Productivity app data optimization</li>
+                                <li>Business expense tracking</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="customization-options">
+                    <h2>Advanced Customization</h2>
+                    <div class="customization-grid">
+                        <div class="custom-option">
+                            <label for="language">Preferred Language</label>
+                            <select id="language" class="form-control">
+                                <option>English</option>
+                                <option>हिंदी</option>
+                                <option>मराठी</option>
+                                <option>தமிழ்</option>
+                                <option>తెలుగు</option>
+                            </select>
+                        </div>
+
+                        <div class="custom-option">
+                            <label for="notifications">Notification Preferences</label>
+                            <select id="notifications" class="form-control">
+                                <option>All Notifications</option>
+                                <option>Important Only</option>
+                                <option>Minimal</option>
+                                <option>Silent</option>
+                            </select>
+                        </div>
+
+                        <div class="custom-option">
+                            <label for="dataAlerts">Data Usage Alerts</label>
+                            <select id="dataAlerts" class="form-control">
+                                <option>At 80% usage</option>
+                                <option>At 90% usage</option>
+                                <option>At 95% usage</option>
+                                <option>Disabled</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Community Support Page -->
+        <div id="community" class="page">
+            <div class="container">
+                <div class="page-header">
+                    <h1>Community-Driven Support Ecosystem</h1>
+                    <p>Connect with peers, share solutions, and get help from expert users</p>
+                </div>
+
+                <div class="community-stats">
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-users"></i>
+                        </div>
+                        <div class="stat-content">
+                            <h3>12,500</h3>
+                            <p>Active Community Members</p>
+                        </div>
+                    </div>
+
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-check-circle"></i>
+                        </div>
+                        <div class="stat-content">
+                            <h3>8,900</h3>
+                            <p>Issues Resolved</p>
+                        </div>
+                    </div>
+
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-star"></i>
+                        </div>
+                        <div class="stat-content">
+                            <h3>450</h3>
+                            <p>Expert Users</p>
+                        </div>
+                    </div>
+
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-clock"></i>
+                        </div>
+                        <div class="stat-content">
+                            <h3>4 min</h3>
+                            <p>Avg Response Time</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="community-actions">
+                    <div class="action-card">
+                        <h3>Ask the Community</h3>
+                        <p>Get help from thousands of Jio users and experts</p>
+                        <button class="btn-primary">
+                            <i class="fas fa-question-circle"></i>
+                            Ask Question
+                        </button>
+                    </div>
+
+                    <div class="action-card">
+                        <h3>Help Others</h3>
+                        <p>Share your knowledge and earn community points</p>
+                        <button class="btn-primary">
+                            <i class="fas fa-hands-helping"></i>
+                            Browse Questions
+                        </button>
+                    </div>
+                </div>
+
+                <div class="recent-discussions">
+                    <h2>Recent Discussions</h2>
+                    <div class="discussion-list">
+                        <div class="discussion-item">
+                            <div class="discussion-avatar">
+                                <i class="fas fa-user-circle"></i>
+                            </div>
+                            <div class="discussion-content">
+                                <h4>5G connectivity issues in Mumbai</h4>
+                                <p>Has anyone experienced slow 5G speeds in Bandra area?</p>
+                                <div class="discussion-meta">
+                                    <span class="discussion-author">@techuser123</span>
+                                    <span class="discussion-time">2 hours ago</span>
+                                    <span class="discussion-replies">5 replies</span>
+                                </div>
+                            </div>
+                            <div class="discussion-status resolved">
+                                <i class="fas fa-check"></i>
+                                Resolved
+                            </div>
+                        </div>
+
+                        <div class="discussion-item">
+                            <div class="discussion-avatar">
+                                <i class="fas fa-user-circle"></i>
+                            </div>
+                            <div class="discussion-content">
+                                <h4>Best data saving tips for families</h4>
+                                <p>Looking for ways to optimize data usage across multiple family members</p>
+                                <div class="discussion-meta">
+                                    <span class="discussion-author">@familymanager</span>
+                                    <span class="discussion-time">5 hours ago</span>
+                                    <span class="discussion-replies">12 replies</span>
+                                </div>
+                            </div>
+                            <div class="discussion-status active">
+                                <i class="fas fa-comments"></i>
+                                Active
+                            </div>
+                        </div>
+
+                        <div class="discussion-item">
+                            <div class="discussion-avatar">
+                                <i class="fas fa-user-circle"></i>
+                            </div>
+                            <div class="discussion-content">
+                                <h4>JioFiber setup troubleshooting</h4>
+                                <p>Complete guide for resolving common JioFiber installation issues</p>
+                                <div class="discussion-meta">
+                                    <span class="discussion-author">@jioexpert</span>
+                                    <span class="discussion-time">1 day ago</span>
+                                    <span class="discussion-replies">28 replies</span>
+                                </div>
+                            </div>
+                            <div class="discussion-status expert">
+                                <i class="fas fa-star"></i>
+                                Expert Guide
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="expert-users">
+                    <h2>Top Contributors</h2>
+                    <div class="expert-grid">
+                        <div class="expert-card">
+                            <div class="expert-avatar">
+                                <i class="fas fa-user-circle"></i>
+                            </div>
+                            <h4>@TechGuru2024</h4>
+                            <p>Network Specialist</p>
+                            <div class="expert-stats">
+                                <span>1,247 solutions</span>
+                                <span>98% helpful</span>
+                            </div>
+                        </div>
+
+                        <div class="expert-card">
+                            <div class="expert-avatar">
+                                <i class="fas fa-user-circle"></i>
+                            </div>
+                            <h4>@DataOptimizer</h4>
+                            <p>Usage Expert</p>
+                            <div class="expert-stats">
+                                <span>856 solutions</span>
+                                <span>96% helpful</span>
+                            </div>
+                        </div>
+
+                        <div class="expert-card">
+                            <div class="expert-avatar">
+                                <i class="fas fa-user-circle"></i>
+                            </div>
+                            <h4>@FiberHelper</h4>
+                            <p>Installation Guide</p>
+                            <div class="expert-stats">
+                                <span>634 solutions</span>
+                                <span>99% helpful</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Data Optimization Page -->
+        <div id="data" class="page">
+            <div class="container">
+                <div class="page-header">
+                    <h1>Intelligent Data Usage Optimization Hub</h1>
+                    <p>Smart data management, family sharing, and usage analytics</p>
+                </div>
+
+                <div class="data-overview">
+                    <div class="data-summary-card">
+                        <div class="data-circle">
+                            <div class="circle-progress" data-percent="41.7">
+                                <div class="circle-fill"></div>
+                                <div class="circle-content">
+                                    <span class="data-used">12.5GB</span>
+                                    <span class="data-total">/ 30GB</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="data-details">
+                            <h3>Current Usage</h3>
+                            <p>17.5GB remaining this month</p>
+                            <div class="usage-trend">
+                                <span class="trend-indicator positive">↓ 15%</span>
+                                <span>vs last month</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="family-usage">
+                        <h3>Family Data Distribution</h3>
+                        <div class="family-chart">
+                            <canvas id="familyChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="family-members">
+                    <h2>Family Member Usage</h2>
+                    <div class="member-list">
+                        <div class="member-card primary">
+                            <div class="member-info">
+                                <div class="member-avatar">
+                                    <i class="fas fa-user"></i>
+                                </div>
+                                <div class="member-details">
+                                    <h4>You (Primary)</h4>
+                                    <span>+91 9876543210</span>
+                                </div>
+                            </div>
+                            <div class="member-usage">
+                                <span class="usage-amount">12.5GB</span>
+                                <div class="usage-bar">
+                                    <div class="usage-fill" style="width: 41.7%"></div>
+                                </div>
+                            </div>
+                            <div class="member-actions">
+                                <button class="btn-secondary">Manage</button>
+                            </div>
+                        </div>
+
+                        <div class="member-card">
+                            <div class="member-info">
+                                <div class="member-avatar">
+                                    <i class="fas fa-user"></i>
+                                </div>
+                                <div class="member-details">
+                                    <h4>Family Member 1</h4>
+                                    <span>+91 9876543211</span>
+                                </div>
+                            </div>
+                            <div class="member-usage">
+                                <span class="usage-amount">8.2GB</span>
+                                <div class="usage-bar">
+                                    <div class="usage-fill" style="width: 27.3%"></div>
+                                </div>
+                            </div>
+                            <div class="member-actions">
+                                <button class="btn-secondary">Manage</button>
+                            </div>
+                        </div>
+
+                        <div class="member-card">
+                            <div class="member-info">
+                                <div class="member-avatar">
+                                    <i class="fas fa-user"></i>
+                                </div>
+                                <div class="member-details">
+                                    <h4>Family Member 2</h4>
+                                    <span>+91 9876543212</span>
+                                </div>
+                            </div>
+                            <div class="member-usage">
+                                <span class="usage-amount">5.1GB</span>
+                                <div class="usage-bar">
+                                    <div class="usage-fill" style="width: 17%"></div>
+                                </div>
+                            </div>
+                            <div class="member-actions">
+                                <button class="btn-secondary">Manage</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="smart-features">
+                    <h2>Smart Data Features</h2>
+                    <div class="features-grid">
+                        <div class="smart-feature">
+                            <div class="feature-icon">
+                                <i class="fas fa-brain"></i>
+                            </div>
+                            <div class="feature-content">
+                                <h4>AI Data Saver</h4>
+                                <p>Automatically optimizes app data usage based on your patterns</p>
+                                <div class="feature-toggle">
+                                    <label class="toggle">
+                                        <input type="checkbox" checked>
+                                        <span class="slider"></span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="smart-feature">
+                            <div class="feature-icon">
+                                <i class="fas fa-share-alt"></i>
+                            </div>
+                            <div class="feature-content">
+                                <h4>Smart Sharing</h4>
+                                <p>Intelligently redistribute unused data among family members</p>
+                                <div class="feature-toggle">
+                                    <label class="toggle">
+                                        <input type="checkbox" checked>
+                                        <span class="slider"></span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="smart-feature">
+                            <div class="feature-icon">
+                                <i class="fas fa-exclamation-triangle"></i>
+                            </div>
+                            <div class="feature-content">
+                                <h4>Emergency Reserve</h4>
+                                <p>Keep 2GB emergency data reserve for critical needs</p>
+                                <div class="feature-toggle">
+                                    <label class="toggle">
+                                        <input type="checkbox">
+                                        <span class="slider"></span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="usage-insights">
+                    <h2>Usage Insights & Tips</h2>
+                    <div class="insights-list">
+                        <div class="insight-item">
+                            <div class="insight-icon">
+                                <i class="fas fa-lightbulb"></i>
+                            </div>
+                            <div class="insight-content">
+                                <h4>Peak Usage Hours</h4>
+                                <p>You use 60% of your data between 7 PM - 11 PM. Consider downloading content during off-peak hours.</p>
+                            </div>
+                        </div>
+
+                        <div class="insight-item">
+                            <div class="insight-icon">
+                                <i class="fas fa-chart-bar"></i>
+                            </div>
+                            <div class="insight-content">
+                                <h4>Top Data Consumer</h4>
+                                <p>Video streaming apps consume 70% of your data. Enable data saver mode to reduce usage.</p>
+                            </div>
+                        </div>
+
+                        <div class="insight-item">
+                            <div class="insight-icon">
+                                <i class="fas fa-calendar"></i>
+                            </div>
+                            <div class="insight-content">
+                                <h4>Monthly Trend</h4>
+                                <p>You're on track to save 5GB this month compared to your average usage pattern.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="app.js"></script>
+</body>
+</html>
