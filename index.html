@@ -507,6 +507,16 @@
             text-align: center;
         }
 
+        .chart-wrapper {
+            position: relative;
+            height: 300px;
+            width: 100%;
+        }
+
+        .chart-wrapper canvas {
+            max-height: 300px !important;
+        }
+
         /* Mood Selector */
         .mood-selector {
             display: flex;
@@ -614,6 +624,53 @@
         .community-stat-label {
             color: var(--text-secondary);
             font-size: 0.9rem;
+        }
+
+        /* Support Action Cards */
+        .support-actions {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+
+        .support-action {
+            background: var(--surface);
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+            text-align: center;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            border: 2px solid transparent;
+        }
+
+        .support-action:hover {
+            transform: translateY(-5px);
+            border-color: var(--primary-blue);
+        }
+
+        .support-action-icon {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            margin: 0 auto 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 2.5rem;
+        }
+
+        .support-action-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+
+        .support-action-desc {
+            color: var(--text-secondary);
+            margin-bottom: 1.5rem;
         }
 
         /* Responsive Design */
@@ -881,7 +938,9 @@
                     <div>
                         <h3 class="mb-1">Current Network Quality</h3>
                         <div class="chart-container">
-                            <canvas id="networkChart" width="400" height="300"></canvas>
+                            <div class="chart-wrapper">
+                                <canvas id="networkChart"></canvas>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -1022,56 +1081,71 @@
                     </div>
                 </div>
 
-                <div id="recovery-content">
-                    <div class="quick-stats">
-                        <div class="stat-card">
-                            <div class="stat-icon bg-orange">
-                                <i class="fas fa-clock"></i>
-                            </div>
-                            <div class="stat-value">< 30 sec</div>
-                            <div class="stat-label">Human Agent Connect</div>
+                <div class="quick-stats">
+                    <div class="stat-card">
+                        <div class="stat-icon bg-orange">
+                            <i class="fas fa-clock"></i>
                         </div>
-                        <div class="stat-card">
-                            <div class="stat-icon bg-green">
-                                <i class="fas fa-percentage"></i>
-                            </div>
-                            <div class="stat-value">87%</div>
-                            <div class="stat-label">First Call Resolution</div>
-                        </div>
-                        <div class="stat-card">
-                            <div class="stat-icon bg-blue">
-                                <i class="fas fa-heart"></i>
-                            </div>
-                            <div class="stat-value">9.2/10</div>
-                            <div class="stat-label">Empathy Score</div>
-                        </div>
+                        <div class="stat-value">< 30 sec</div>
+                        <div class="stat-label">Human Agent Connect</div>
                     </div>
+                    <div class="stat-card">
+                        <div class="stat-icon bg-green">
+                            <i class="fas fa-percentage"></i>
+                        </div>
+                        <div class="stat-value">87%</div>
+                        <div class="stat-label">First Call Resolution</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon bg-blue">
+                            <i class="fas fa-heart"></i>
+                        </div>
+                        <div class="stat-value">9.2/10</div>
+                        <div class="stat-label">Empathy Score</div>
+                    </div>
+                </div>
 
-                    <div class="chart-container">
-                        <h3 class="chart-title">Instant Support Options</h3>
-                        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1rem;">
-                            <button class="btn btn-primary" style="padding: 1.5rem; height: auto;">
-                                <i class="fas fa-phone" style="display: block; font-size: 2rem; margin-bottom: 0.5rem;"></i>
-                                <strong>Call Priority Support</strong><br>
-                                <small>Connect to human agent in < 30 seconds</small>
-                            </button>
-                            <button class="btn btn-secondary" style="padding: 1.5rem; height: auto;">
-                                <i class="fas fa-comments" style="display: block; font-size: 2rem; margin-bottom: 0.5rem;"></i>
-                                <strong>Live Chat with Expert</strong><br>
-                                <small>Instant text support with screen sharing</small>
-                            </button>
-                            <button class="btn btn-warning" style="padding: 1.5rem; height: auto;">
-                                <i class="fas fa-gift" style="display: block; font-size: 2rem; margin-bottom: 0.5rem;"></i>
-                                <strong>Compensation Calculator</strong><br>
-                                <small>Automatic credits for service issues</small>
-                            </button>
+                <div class="chart-container">
+                    <h3 class="chart-title">Instant Support Options</h3>
+                    <div class="support-actions">
+                        <div class="support-action">
+                            <div class="support-action-icon bg-blue">
+                                <i class="fas fa-phone"></i>
+                            </div>
+                            <h4 class="support-action-title">Call Priority Support</h4>
+                            <p class="support-action-desc">Connect to human agent in less than 30 seconds</p>
+                            <button class="btn btn-primary">Call Now</button>
+                        </div>
+                        
+                        <div class="support-action">
+                            <div class="support-action-icon bg-purple">
+                                <i class="fas fa-comments"></i>
+                            </div>
+                            <h4 class="support-action-title">Live Chat with Expert</h4>
+                            <p class="support-action-desc">Instant text support with screen sharing</p>
+                            <button class="btn btn-secondary">Start Chat</button>
+                        </div>
+                        
+                        <div class="support-action">
+                            <div class="support-action-icon bg-orange">
+                                <i class="fas fa-gift"></i>
+                            </div>
+                            <h4 class="support-action-title">Compensation Calculator</h4>
+                            <p class="support-action-desc">Automatic credits for service issues</p>
+                            <button class="btn btn-warning">Calculate Credits</button>
                         </div>
                     </div>
                 </div>
 
                 <div class="chart-container">
                     <h3 class="chart-title">Recent Resolution Success</h3>
-                    <canvas id="satisfactionChart" width="400" height="200"></canvas>
+                    <div class="chart-wrapper">
+                        <canvas id="satisfactionChart"></canvas>
+                    </div>
+                </div>
+
+                <div id="recovery-content">
+                    <!-- Dynamic content based on mood selection -->
                 </div>
             </div>
 
@@ -1338,7 +1412,9 @@
                 <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 2rem;">
                     <div class="chart-container">
                         <h3 class="chart-title">Data Usage Analytics</h3>
-                        <canvas id="dataUsageChart" width="400" height="300"></canvas>
+                        <div class="chart-wrapper">
+                            <canvas id="dataUsageChart"></canvas>
+                        </div>
                     </div>
 
                     <div class="chart-container">
@@ -1466,8 +1542,9 @@
                 this.setupNavigation();
                 this.setupMobileMenu();
                 this.setupInteractiveElements();
-                this.initializeCharts();
                 this.loadPage('dashboard');
+                // Initialize charts after page load
+                setTimeout(() => this.initializeCharts(), 500);
             }
 
             setupNavigation() {
@@ -1486,8 +1563,10 @@
                 featureCards.forEach(card => {
                     card.addEventListener('click', () => {
                         const targetPage = card.getAttribute('data-page');
-                        this.loadPage(targetPage);
-                        this.updateActiveNavItem(document.querySelector(`[data-page="${targetPage}"]`));
+                        if (targetPage) {
+                            this.loadPage(targetPage);
+                            this.updateActiveNavItem(document.querySelector(`[data-page="${targetPage}"]`));
+                        }
                     });
                 });
             }
@@ -1590,6 +1669,30 @@
                             </div>
                         </div>
                     `;
+                } else {
+                    recoveryContent.innerHTML = `
+                        <div class="chart-container">
+                            <h3 style="color: var(--primary-blue);">Your feedback helps us improve! 😐</h3>
+                            <p style="font-size: 1.1rem; margin: 1rem 0;">We're always working to make your Jio experience better. Here's what we can help with today.</p>
+                            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem;">
+                                <button class="btn btn-primary" style="padding: 1rem;">
+                                    <i class="fas fa-cog"></i><br>
+                                    <strong>Service Optimization</strong><br>
+                                    <small>Improve your current plan</small>
+                                </button>
+                                <button class="btn btn-secondary" style="padding: 1rem;">
+                                    <i class="fas fa-question-circle"></i><br>
+                                    <strong>Get Support</strong><br>
+                                    <small>Quick help for any issues</small>
+                                </button>
+                                <button class="btn btn-success" style="padding: 1rem;">
+                                    <i class="fas fa-chart-line"></i><br>
+                                    <strong>Usage Analytics</strong><br>
+                                    <small>See your usage patterns</small>
+                                </button>
+                            </div>
+                        </div>
+                    `;
                 }
             }
 
@@ -1636,6 +1739,19 @@
                             { title: 'Offline Support', desc: 'Download guides for offline troubleshooting', action: 'Download' },
                             { title: 'Community Connect', desc: 'Connect with local Jio users nearby', action: 'Join' }
                         ]
+                    },
+                    'professional': {
+                        title: 'Your Personalized Dashboard - Urban Professional',
+                        stats: [
+                            { icon: 'fas fa-phone-volume', value: '98.5%', label: 'Call Quality (Work Hours)', color: 'blue' },
+                            { icon: 'fas fa-video', value: '45', label: 'Video Calls This Month', color: 'green' },
+                            { icon: 'fas fa-chart-line', value: '15 GB', label: 'Business Data Usage', color: 'purple' }
+                        ],
+                        features: [
+                            { title: 'Meeting Quality Guarantee', desc: 'Priority network access during business hours (9 AM - 6 PM)', action: 'Enabled' },
+                            { title: 'Productivity Analytics', desc: 'Track your connectivity patterns and optimize for work efficiency', action: 'View Report' },
+                            { title: 'Business Continuity Backup', desc: 'Automatic hotspot sharing if primary connection fails', action: 'Configure' }
+                        ]
                     }
                 };
 
@@ -1659,7 +1775,7 @@
                             <div class="feature-card">
                                 <h4>${feature.title}</h4>
                                 <p>${feature.desc}</p>
-                                <button class="btn ${feature.action === 'Active' || feature.action === 'Activated' ? 'btn-success' : 'btn-primary'}">${feature.action}</button>
+                                <button class="btn ${feature.action === 'Active' || feature.action === 'Activated' || feature.action === 'Enabled' ? 'btn-success' : 'btn-primary'}">${feature.action}</button>
                             </div>
                         `).join('')}
                     </div>
@@ -1689,14 +1805,13 @@
                 document.querySelectorAll('.nav-item').forEach(item => {
                     item.classList.remove('active');
                 });
-                activeItem.classList.add('active');
+                if (activeItem) {
+                    activeItem.classList.add('active');
+                }
             }
 
             initializeCharts() {
-                // Initialize charts after a small delay to ensure DOM is ready
-                setTimeout(() => {
-                    this.initializePageCharts(this.currentPage);
-                }, 200);
+                this.initializePageCharts(this.currentPage);
             }
 
             initializePageCharts(pageId) {
@@ -1724,7 +1839,8 @@
                         datasets: [{
                             data: [67, 32, 1],
                             backgroundColor: ['#10B981', '#0066CC', '#EF4444'],
-                            borderWidth: 0
+                            borderWidth: 2,
+                            borderColor: '#fff'
                         }]
                     },
                     options: {
@@ -1732,7 +1848,11 @@
                         maintainAspectRatio: false,
                         plugins: {
                             legend: {
-                                position: 'bottom'
+                                position: 'bottom',
+                                labels: {
+                                    padding: 20,
+                                    usePointStyle: true
+                                }
                             }
                         }
                     }
@@ -1752,12 +1872,15 @@
                     data: {
                         labels: ['Week 1', 'Week 2', 'Week 3', 'Week 4'],
                         datasets: [{
-                            label: 'Resolution Success Rate',
+                            label: 'Resolution Success Rate (%)',
                             data: [65, 72, 85, 87],
                             borderColor: '#10B981',
                             backgroundColor: 'rgba(16, 185, 129, 0.1)',
                             tension: 0.4,
-                            fill: true
+                            fill: true,
+                            pointBackgroundColor: '#10B981',
+                            pointBorderColor: '#fff',
+                            pointBorderWidth: 2
                         }]
                     },
                     options: {
@@ -1765,13 +1888,19 @@
                         maintainAspectRatio: false,
                         plugins: {
                             legend: {
-                                display: false
+                                display: true,
+                                position: 'top'
                             }
                         },
                         scales: {
                             y: {
                                 beginAtZero: true,
-                                max: 100
+                                max: 100,
+                                ticks: {
+                                    callback: function(value) {
+                                        return value + '%';
+                                    }
+                                }
                             }
                         }
                     }
@@ -1793,8 +1922,11 @@
                         datasets: [{
                             label: 'Data Usage (GB)',
                             data: [2.5, 3.2, 3.8, 3.0],
-                            backgroundColor: '#0066CC',
-                            borderRadius: 8
+                            backgroundColor: 'rgba(0, 102, 204, 0.8)',
+                            borderColor: '#0066CC',
+                            borderWidth: 1,
+                            borderRadius: 8,
+                            borderSkipped: false,
                         }]
                     },
                     options: {
@@ -1802,12 +1934,18 @@
                         maintainAspectRatio: false,
                         plugins: {
                             legend: {
-                                display: false
+                                display: true,
+                                position: 'top'
                             }
                         },
                         scales: {
                             y: {
-                                beginAtZero: true
+                                beginAtZero: true,
+                                ticks: {
+                                    callback: function(value) {
+                                        return value + ' GB';
+                                    }
+                                }
                             }
                         }
                     }
